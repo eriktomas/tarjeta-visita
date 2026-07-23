@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Erik Tomás Hermanson · Voltamper</title>
+<meta name="description" content="Tarjeta de contacto de Erik Tomás Hermanson — Business Controller en Voltamper">
+<meta name="theme-color" content="#E40918">
+<link rel="icon" type="image/png" href="logo-192.png">
+<link rel="apple-touch-icon" href="apple-touch-voltamper.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rojo:#E40918;
+    --rojo-oscuro:#b30713;
+    --tinta:#1d1a1a;
+    --gris:#6d6663;
+    --crema:#faf6f1;
+    --papel:#fffdfb;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    font-family:'Archivo',sans-serif;
+    color:var(--tinta);
+    background:var(--crema);
+    display:flex;align-items:center;justify-content:center;
+    padding:22px;
+    overflow:hidden;
+    position:relative;
+  }
+
+  /* ── atmósfera de fondo ── */
+  .bg-circulo{
+    position:fixed;border-radius:50%;
+    filter:blur(80px);opacity:.16;pointer-events:none;
+    background:var(--rojo);
+  }
+  .bg-circulo.a{width:65vmax;height:65vmax;top:-38vmax;right:-25vmax;animation:flotar 14s ease-in-out infinite alternate}
+  .bg-circulo.b{width:45vmax;height:45vmax;bottom:-30vmax;left:-18vmax;opacity:.09;animation:flotar 18s ease-in-out infinite alternate-reverse}
+  @keyframes flotar{from{transform:translate(0,0)}to{transform:translate(-4vmax,3vmax)}}
+  .grano{
+    position:fixed;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ── la tarjeta ── */
+  .tarjeta{
+    position:relative;z-index:1;
+    width:min(400px,100%);
+    background:var(--papel);
+    border-radius:22px;
+    padding:44px 32px 30px;
+    box-shadow:
+      0 1px 2px rgba(29,26,26,.06),
+      0 12px 28px rgba(29,26,26,.10),
+      0 32px 64px rgba(228,9,24,.10);
+    overflow:hidden;
+    animation:entrar .7s cubic-bezier(.22,1,.36,1) both;
+  }
+  @keyframes entrar{
+    from{opacity:0;transform:translateY(26px) rotate(-1.2deg)}
+    to{opacity:1;transform:translateY(0) rotate(0)}
+  }
+  /* banda superior tipo tarjeta impresa */
+  .tarjeta::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:10px;
+    background:linear-gradient(90deg,var(--rojo) 0 62%,var(--tinta) 62% 100%);
+  }
+
+  .aparece{opacity:0;animation:sube .6s cubic-bezier(.22,1,.36,1) forwards}
+  @keyframes sube{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  .d1{animation-delay:.25s}.d2{animation-delay:.38s}.d3{animation-delay:.5s}
+  .d4{animation-delay:.62s}.d5{animation-delay:.78s}.d6{animation-delay:.95s}
+
+  /* ── sello giratorio con monograma ── */
+  .sello{position:relative;width:104px;height:104px;margin-bottom:26px}
+  .sello svg{position:absolute;inset:0;animation:girar 26s linear infinite}
+  @keyframes girar{to{transform:rotate(360deg)}}
+  .sello svg text{
+    font-family:'Archivo',sans-serif;font-size:11.5px;font-weight:600;
+    letter-spacing:3.5px;fill:var(--gris);text-transform:uppercase;
+  }
+  .monograma{
+    position:absolute;inset:18px;border-radius:50%;
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 18px rgba(228,9,24,.22), 0 0 0 2px var(--rojo);
+    overflow:hidden;
+  }
+  .monograma img{width:74%;height:74%;object-fit:contain;display:block}
+
+  /* ── identidad ── */
+  h1{
+    font-family:'Fraunces',serif;font-weight:650;
+    font-size:clamp(30px,8.5vw,38px);line-height:1.06;
+    letter-spacing:-.5px;
+  }
+  h1 .apellido{color:var(--rojo)}
+  .cargo{margin-top:10px;font-size:15px;color:var(--gris);font-weight:500}
+  .empresa{
+    display:inline-flex;align-items:center;gap:8px;
+    margin-top:14px;font-size:12.5px;font-weight:600;
+    letter-spacing:2.5px;text-transform:uppercase;color:var(--tinta);
+  }
+  .empresa::before{content:"";width:22px;height:2px;background:var(--rojo)}
+
+  .separador{margin:26px 0 22px;border:none;border-top:1px dashed #e3dcd4}
+
+  /* ── acciones ── */
+  .btn-principal{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    width:100%;padding:17px 20px;border-radius:14px;
+    background:var(--rojo);color:#fff;text-decoration:none;
+    font-family:'Archivo',sans-serif;font-size:16.5px;font-weight:600;
+    box-shadow:0 10px 22px rgba(228,9,24,.32);
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn-principal:active{transform:scale(.97);background:var(--rojo-oscuro);box-shadow:0 4px 10px rgba(228,9,24,.3)}
+  .btn-principal svg{flex:none}
+
+  .fila-botones{display:flex;gap:10px;margin-top:12px}
+  .btn-sec{
+    flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+    padding:14px 10px;border-radius:14px;
+    background:#f4eee7;color:var(--tinta);text-decoration:none;
+    font-size:14.5px;font-weight:600;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn-sec:active{transform:scale(.96);background:#ece4da}
+  .btn-sec svg{flex:none;color:var(--rojo)}
+
+  .pie{margin-top:24px;text-align:center;font-size:12px;color:#a39a94;letter-spacing:.4px}
+  .pie a{color:inherit;text-decoration:none;border-bottom:1px solid #d9d0c7}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .aparece{opacity:1}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-circulo a"></div>
+<div class="bg-circulo b"></div>
+<div class="grano"></div>
+
+<main class="tarjeta">
+
+  <div class="sello aparece d1">
+    <svg viewBox="0 0 104 104" aria-hidden="true">
+      <defs><path id="orbita" d="M52,52 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+      <text><textPath href="#orbita">VOLTAMPER · ZARAGOZA · VOLTAMPER ·</textPath></text>
+    </svg>
+    <div class="monograma"><img src="voltamper-logo.svg" alt="Logo de Voltamper"></div>
+  </div>
+
+  <h1 class="aparece d2">Erik Tomás<br><span class="apellido">Hermanson</span></h1>
+  <p class="cargo aparece d3" id="cargo"></p>
+  <p class="empresa aparece d3">Voltamper</p>
+
+  <hr class="separador aparece d4">
+
+  <a class="btn-principal aparece d4" id="btnVcf" href="erik-tomas.vcf">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>
+    </svg>
+    Guardar contacto
+  </a>
+
+  <div class="fila-botones">
+    <a class="btn-sec aparece d5" id="btnTel" href="#">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+      Llamar
+    </a>
+    <a class="btn-sec aparece d5" id="btnMail" href="#">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+      </svg>
+      Email
+    </a>
+  </div>
+
+  <p class="pie aparece d6"><a href="https://www.voltamper.com" target="_blank" rel="noopener">voltamper.com</a></p>
+
+</main>
+
+<script>
+  // ===== DATOS DE CONTACTO — al cambiarlos, actualizar también erik-tomas.vcf (ver README) =====
+  const DATOS = {
+    cargo: "Business Controller",
+    movil: "+34664398592",
+    email: "eriktomas@voltamper.com",
+  };
+  document.getElementById("cargo").textContent = DATOS.cargo;
+  document.getElementById("btnTel").href = "tel:" + DATOS.movil;
+  document.getElementById("btnMail").href = "mailto:" + DATOS.email;
+</script>
+
+</body>
+</html>
