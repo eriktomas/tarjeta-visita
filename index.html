@@ -39,9 +39,18 @@
   .banda span:last-child{flex:38;background:var(--tinta)}
 
   .tarjeta{
+    position:relative;z-index:1;
     width:min(420px,100%);flex:1;
     display:flex;flex-direction:column;align-items:center;
     padding:clamp(12px,2.2svh,24px) 22px clamp(10px,1.8svh,22px);
+  }
+
+  /* marca de agua: el león de ALTIV, grande, cortado por el borde y transparente al 90 % */
+  .marca-agua{
+    position:fixed;z-index:0;pointer-events:none;
+    width:min(86vw,360px);height:auto;
+    right:max(-24vw,-100px);bottom:-6svh;
+    opacity:.10;
   }
 
 
@@ -126,6 +135,7 @@
 <body>
 
 <div class="banda"><span></span><span></span></div>
+<img class="marca-agua" src="altiv-leon.svg" alt="" aria-hidden="true">
 
 <main class="tarjeta">
 
