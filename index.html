@@ -39,7 +39,7 @@
   .banda span:last-child{flex:38;background:var(--tinta)}
 
   .tarjeta{
-    position:relative;z-index:1;
+    position:relative;z-index:1;isolation:isolate;overflow:hidden;
     width:min(420px,100%);flex:1;
     display:flex;flex-direction:column;align-items:center;
     padding:clamp(12px,2.2svh,24px) 22px clamp(10px,1.8svh,22px);
@@ -48,10 +48,11 @@
   /* marca de agua: el león de ALTIV pequeño en la esquina de arriba a la derecha, junto al sello,
      cortado por el borde, donde no hay texto que tapar */
   .marca-agua{
-    position:fixed;z-index:0;pointer-events:none;
-    width:min(40vw,170px);height:auto;
-    right:-34px;top:22px;
-    opacity:.09;
+    /* dentro de la tarjeta (no de la ventana): en pantallas anchas se queda pegado a la tarjeta */
+    position:absolute;z-index:-1;pointer-events:none;
+    width:170px;height:auto;
+    right:-36px;top:10px;
+    opacity:.12;
   }
 
 
@@ -137,9 +138,8 @@
 <body>
 
 <div class="banda"><span></span><span></span></div>
-<img class="marca-agua" src="altiv-leon.svg" alt="" aria-hidden="true">
-
 <main class="tarjeta">
+  <img class="marca-agua" src="altiv-leon.svg" alt="" aria-hidden="true">
 
   <div class="sello">
     <svg viewBox="0 0 176 176" aria-hidden="true">
